@@ -1,0 +1,52 @@
+# docker-compose.yml (conceptual)
+services:
+  api:
+    build: "./FastApi Backend"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - broker
+      - db
+      - redis
+    volumes:
+      - "./FastApi Backend:/app"
+    networks:
+      - backend
+
+
+  #worker:
+    #build: ./worker
+    #depends_on:
+     # - broker
+      #- db
+
+  agent:
+    build: ./Agent
+    volumes:
+      - ./Agent:/app
+    #deploy:
+     # replicas: 3   # simulate multiple nodes
+    networks:
+      - backend
+
+
+  broker:
+    image: apache/kafka:latest
+    networks:
+      - backend
+
+
+  db:
+    image: timescale/timescaledb:latest-pg16
+    networks:
+      - backend
+
+
+  redis:
+    image: redis:latest
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

@@ -3,7 +3,7 @@ import asyncio
 import time
 import aiohttp
 
-BACKEND_URL = "http://api:8000/metrics"
+BACKEND_URL = "http://api:8000/metrics/send"
 NODE_ID = "node-1"
 
 async def collect_metrics():

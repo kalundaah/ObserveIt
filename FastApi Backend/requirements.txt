@@ -1,2 +1,6 @@
 fastapi[standard]
 psycopg2-binary
+kafka-python
+SQLAlchemy
+python-dotenv
+aio-pika
